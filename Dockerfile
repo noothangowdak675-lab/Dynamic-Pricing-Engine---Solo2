@@ -1,29 +1,32 @@
 # ---------------------------------------
-# Build
+# Development stage
 # ---------------------------------------
-FROM python:3.9-bullseye AS build
-ENV PYTHONUNBUFFERED 1
-WORKDIR /lotus
-# pip install optimization
-RUN apt-get update && apt-get install -y netcat-openbsd
-COPY pyproject.toml poetry.lock ./
-RUN pip install --no-cache-dir --disable-pip-version-check poetry
-RUN poetry config virtualenvs.create false \
-  && poetry install --no-interaction --no-ansi
-COPY ./lotus/ ./lotus/
-COPY ./metering_billing/ ./metering_billing/
-COPY ./api/ ./api/
-COPY ./manage.py ./
+FROM node:18.11.0-alpine AS development
+WORKDIR /frontend
+ENV NODE_OPTIONS=--max_old_space_size=2048
+COPY package*.json yarn.lock tsconfig.json \
+    vite.config.ts tsconfig.node.json postcss.config.cjs\
+    tailwind.config.cjs ./
+RUN apk add --no-cache \
+    chromium \
+    && rm -rf /var/cache/apk/* /tmp/*
+RUN yarn config set network-timeout 300000 && \
+    yarn install --frozen-lockfile
+# Bundle app source
+COPY public/ ./public/
+COPY src/ ./src/
 # ---------------------------------------
-# Development
+# Build stage
 # ---------------------------------------
-FROM build AS development
-COPY ./pytest.ini ./.coveragerc ./
-COPY ./scripts/start_backend.dev.sh ./scripts/start_backend.dev.sh
-RUN chmod +x ./scripts/start_backend.dev.sh
+FROM development AS build
+RUN yarn run build
 # ---------------------------------------
-# Production
+# Production stage
 # ---------------------------------------
-FROM build AS production
-COPY ./scripts/start_backend.prod.sh ./scripts/start_backend.prod.sh
-RUN chmod +x ./scripts/start_backend.prod.sh
+FROM nginx:1.23-alpine AS production
+#copy static files to nginx
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=build /frontend/src/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
