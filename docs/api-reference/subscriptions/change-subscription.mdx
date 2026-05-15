@@ -1,0 +1,31 @@
+---
+title: "Update a subscription"
+openapi: "POST /api/subscriptions/{subscription_id}/update/"
+description: "Cancel auto-renew or change the end date of a subscription."
+---
+
+<CodeGroup>
+
+```py Python
+lotus.update_subscription(
+  subscription_id='sub_a623349004cd4947aca1851c64aa6fbd',
+  turn_off_auto_renew=True
+)
+
+lotus.update_subscription(
+  subscription_id='sub_a623349004cd4947aca1851c64aa6fbd',
+  end_date='2022-02-23 03:30:00+00:00',
+)
+```
+
+```ts Typescript
+await lotus.updateSubscription({
+  subscription_id: "sub_a623349004cd4947aca1851c64aa6fbd",
+  turn_off_auto_renew: true,
+  end_date: "2022-02-23 03:30:00+00:00",
+});
+```
+
+</CodeGroup>
+
+---

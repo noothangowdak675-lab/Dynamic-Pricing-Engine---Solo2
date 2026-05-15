@@ -1,0 +1,28 @@
+---
+title: "Python Library"
+---
+
+The python SDK uses an internal queue with automatic batching and flushing for the events tracking functionality, but uses blocking calls for the rest of the API. You can find the [SDK repository here](https://github.com/uselotus/lotus-python).
+
+## Installation
+
+```bash
+pip install lotus-python
+```
+
+Follow the steps in the API Overview to get an API key, and then set it in your code. Additionally, if you're self-hosting, you can set the host to your self-hosted instance.
+
+Make sure to import the lotus library and set your api key **before** making any
+calls.
+
+```bash
+import lotus
+lotus.api_key = 'YOUR API KEY'
+lotus.host = 'https://api.uselotus.io' #will default to this if not set
+```
+
+To debug, you can set debug mode.
+
+```bash
+lotus.debug = True
+```

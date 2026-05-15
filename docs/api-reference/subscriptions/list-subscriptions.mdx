@@ -1,0 +1,18 @@
+---
+title: "List subscriptions"
+openapi: GET /api/subscriptions/
+---
+
+Retrieves an array of `subscription` objects.
+
+<CodeGroup>
+
+```py Python
+lotus.list_subscriptions(customer_id="cust_id")
+```
+
+```ts Typescript
+await lotus.listSubscriptions({ customerId: "cust_id" });
+```
+
+</CodeGroup>

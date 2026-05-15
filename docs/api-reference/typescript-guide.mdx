@@ -1,0 +1,36 @@
+---
+title: "Typescript Library"
+---
+
+## Installing
+
+Install the lotus-typescript package for use in your typescript server. It is important to note that all input parameters and responses should be in _snake_case_!
+
+<CodeGroup>
+
+```bash npm
+npm install lotus-typescript
+```
+
+```bash yarn
+yarn add lotus-typescript
+```
+
+</CodeGroup>
+
+## Initializing
+
+Follow the steps in the API Overview to get an API key, and then set it in your code. Additionally, if you're self-hosting, you can set the host to your self-hosted instance.
+
+```bash
+import Lotus = require("lotus-typescript")
+
+//If the line above presents erros, use this import below
+//const {Lotus} = require("lotus-typescript/dist/index.js");
+
+const api_key= "YOUR API KEY";
+
+const lotus = new Lotus(api_key, {
+  host: "https://api.uselotus.io/", // You can omit this line if using Lotus Cloud
+});
+```

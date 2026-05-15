@@ -1,0 +1,20 @@
+---
+title: "List plans"
+openapi: "GET /api/plans/"
+---
+
+Retrieves an array of plan objects.
+
+Out of the parameters below, `duration`, `exclude_tags`, `include_tags`, and `include_tags_all` will filter plan objects. `version_currency_code`, `version_custom_type`, and `version_status` will filter versions within those plans. If a plan has no versions that match the filter, it will not be returned.
+
+<CodeGroup>
+
+```py Python
+lotus.list_plans()
+```
+
+```ts Typescript
+await lotus.listPlans(); // will return a promise;
+```
+
+</CodeGroup>

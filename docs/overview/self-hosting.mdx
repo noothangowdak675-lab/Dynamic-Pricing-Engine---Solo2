@@ -1,0 +1,52 @@
+---
+title: "👤 Self-Hosting"
+sidebarTitle: "Self-Hosting"
+description: "Best if you want to keep your data local or want full control and
+  extensibility."
+---
+
+### 💻 Local Hobby Instance
+> **Minimum requirements:**<br/>
+> 2 core, 4G ram and 20GB Disk space
+1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) and make sure docker has started.
+2. Clone the repo and navigate to the project
+   ```sh
+   git clone https://github.com/uselotus/lotus.git && cd lotus
+   ```
+3. Run the self-hosting script:
+   ```sh
+    ./scripts/self-host.sh
+   ```
+   If you need to give the script permission to run, run `chmod 755 ./scripts/self-host.sh` first.
+4. You should now be able to access the homepage at [localhost/](http://localhost/), and sign in using the `ADMIN_USERNAME` and `ADMIN_PASSWORD` you defined, or the default, which is:
+   ```py
+   username: change_me
+   password: change_me
+   ```
+
+Optionally:
+
+- Change the environment variables located in `env/.env.prod` to suit your needs.
+
+### Local Hobby Env variables
+
+| Variable Name          | (Default) Value     | Change? |
+| ---------------------- | ------------------- | ------- |
+| POSTGRES_USER          | lotus               | ✔       |
+| POSTGRES_DB            | lotus               | ✔       |
+| POSTGRES_PASSWORD      | lotus               | ✔       |
+| SECRET_KEY             | change_me           | ✔       |
+| ADMIN_USERNAME         | change_me           | ✔       |
+| ADMIN_EMAIL            | change_me           | ✔       |
+| ADMIN_PASSWORD         | change_me           | ✔       |
+| SELF_HOSTED            | True                |         |
+| DOCKERIZED             | True                |         |
+| DJANGO_SETTINGS_MODULE | "lotus.settings"    |         |
+| NODE_ENV               | production          |         |
+| VITE_API_URL           | "http://localhost/" |         |
+| STRIPE_LIVE_SECRET_KEY | sk_live\_           | ✔       |
+| STRIPE_LIVE_CLIENT     | ca\_                | ✔       |
+| STRIPE_TEST_SECRET_KEY | sk_test\_           | ✔       |
+| STRIPE_TEST_CLIENT     | ca\_                | ✔       |
+| STRIPE_WEBHOOK_SECRET  | whsec\_             | ✔       |
+| SVIX_JWT_SECRET        | change_me           | ✔       |

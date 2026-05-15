@@ -1,0 +1,24 @@
+---
+title: "Get a customer"
+openapi: "GET /api/customers/{customer_id}/"
+description: ""
+---
+
+Retrieves a customer object.
+
+<CodeGroup>
+```py Python
+lotus.get_customer(
+  customer_id='cust_0569173ee6654369',
+)
+```
+
+```ts Typescript
+await lotus.getCustomer({
+  customer_id: "cust_0569173ee6654369",
+});
+```
+
+</CodeGroup>
+
+---

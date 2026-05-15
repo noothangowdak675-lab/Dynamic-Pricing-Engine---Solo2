@@ -1,0 +1,34 @@
+---
+title: "API Overview"
+openapi: GET /api/ping/
+---
+
+## Getting Started
+
+You can access Lotus's API directly or through one of our SDKs. We highly recommend using the SDKs as they provide a more user-friendly interface and can help you more easily interpret the return types.
+
+If you're not using an SDK, all API calls must be made over https to `api.uselotus.io/api/`
+
+### How to use your API key
+
+To obtain an API key, you must navigate to Settings > Developer Settings > API Keys in the Lotus frontend. You can create a new API key by clicking the Add API Key button, where you'll be prompted to give it a name and an optional expiration date.
+
+![API Key Creation page](/images/api-overview/api_keys.png)
+
+The full API key will only be shown once, so make sure to copy it somewhere safe. You can always delete or regenerate the API key if you need to.
+
+The API key must be passed into the _X-API-KEY_ header in your requests.
+
+To confirm that your API key is working, you can make a request to the _/api/ping_ endpoint. This will return the `organization_id` the API key belongs to.
+
+<CodeGroup>
+
+```py Python
+lotus.ping()
+```
+
+```ts Typescript
+await lotus.ping();
+```
+
+</CodeGroup>
